@@ -24,8 +24,7 @@ puts "#{get_date.month}月 #{get_date.year}年".center(20)
 
 puts "日 月 火 水 木 金 土"
 
-space = "   " * first_date.wday
-print space
+print "   " * first_date.wday
 
 week_day = first_date.wday
 (1..last_date.day).each do |day|
