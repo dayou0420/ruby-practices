@@ -28,8 +28,8 @@ space = "   " * first_date.wday
 print space
 
 week_day = first_date.wday
-(1..last_date.day).each do |days|
-  print days.to_s.rjust(2) + " "
+(1..last_date.day).each do |day|
+  print day.to_s.rjust(2) + " "
   week_day = week_day + 1
   if week_day %7 == 0
     print "\n"
