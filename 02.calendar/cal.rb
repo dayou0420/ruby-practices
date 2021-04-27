@@ -39,3 +39,4 @@ end
 if week_day%7!=0
   print "\n"
 end
+
