@@ -5,22 +5,22 @@ require 'optparse'
 
 opt = OptionParser.new
 
-create_date = Date.today
+dates = Date.today
 
-opt.on('-y', '--year VALUE', "year value") do |create_year|
-  create_date = Date.new(create_year.to_i, create_date.month)
+opt.on('-y', '--year VALUE', "year value") do |y|
+  dates = Date.new(y.to_i, dates.month)
 end
 
-opt.on('-m', '--month VALUE', "month value") do |create_month|
-  create_date = Date.new(create_date.year, create_month.to_i)
+opt.on('-m', '--month VALUE', "month value") do |m|
+  dates = Date.new(dates.year, m.to_i)
 end
 
 opt.parse!(ARGV)
 
-first_date = Date.new(create_date.year, create_date.month, 1)
-last_date = Date.new(create_date.year, create_date.month, -1)
+first_date = Date.new(dates.year, dates.month, 1)
+last_date = Date.new(dates.year, dates.month, -1)
 
-puts "#{create_date.month}月 #{create_date.year}年".center(20)
+puts "#{dates.month}月 #{dates.year}年".center(20)
 
 puts "日 月 火 水 木 金 土"
 
