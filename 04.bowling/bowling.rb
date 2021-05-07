@@ -14,10 +14,7 @@ scores.each do |s|
   end
 end
 
-frames = []
-shots.each_slice(2) do |s|
-  frames.push(s)
-end
+frames = shots.each_slice(2).to_a { |s| frames.push(s) }
 
 point = 0
 shots.each do |x|
