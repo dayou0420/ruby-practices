@@ -21,9 +21,9 @@ point = shots.sum
 frames.each_with_index do |frame, i|
   if frames[i][0] == 10 && frames[i + 1][0] == 10
     point += frames[i + 1][0] + frames[i + 2][0]
-  elsif frames[i][0] == 10 && frames[i + 1][0] < 10
+  elsif frames[i][0] == 10
     point += frames[i + 1][0] + frames[i + 1][1]
-  elsif frame.sum == 10 && frames[i][0] < 10 && i < 9
+  elsif frame.sum == 10
     point += frames[i + 1][0]
   end
   break if i == 8
