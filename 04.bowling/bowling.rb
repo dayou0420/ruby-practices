@@ -38,4 +38,3 @@ frames.each_with_index do |frame, i|
 end
 
 puts point
-
