@@ -16,10 +16,7 @@ end
 
 frames = shots.each_slice(2).to_a { |s| frames.push(s) }
 
-point = 0
-shots.each do |x|
-  point += x
-end
+point = shots.sum
 
 frames.each_with_index do |frame, i|
   if frames[i][0] == 10 && frames[i + 1][0] == 10
