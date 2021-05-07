@@ -19,8 +19,6 @@ shots.each_slice(2) do |s|
   frames.push(s)
 end
 
-p frames
-
 point = 0
 shots.each do |x|
   point += x
