@@ -18,15 +18,14 @@ frames = shots.each_slice(2).to_a { |s| frames.push(s) }
 
 point = shots.sum
 
-frames.each_with_index do |frame, i|
-  if frames[i][0] == 10 && frames[i + 1][0] == 10
-    point += frames[i + 1][0] + frames[i + 2][0]
-  elsif frames[i][0] == 10
-    point += frames[i + 1][0] + frames[i + 1][1]
-  elsif frame.sum == 10
-    point += frames[i + 1][0]
+(0..8).each do |n|
+  if frames[n][0] == 10 && frames[n + 1][0] == 10
+    point += frames[n + 1][0] + frames[n + 2][0]
+  elsif frames[n][0] == 10
+    point += frames[n + 1][0] + frames[n + 1][1]
+  elsif frames[n][0] + frames[n][1] == 10
+    point += frames[n + 1][0]
   end
-  break if i == 8
 end
 
 puts point
