@@ -20,7 +20,6 @@ allow_size = files.size / 3
 
 result = files.each_slice(allow_size).to_a.transpose
 
-## ls -l description here
 if params['r']
 
   # ls -r command output here
@@ -93,6 +92,5 @@ elsif params['l']
     "#{file_time_stamp_month_output} #{file_time_stamp_day_output} #{file_time_stamp_time_output} #{file}"
   end
 else
-  # ls command output without option here
   result.each { |row| puts row.join(' ') }
 end
