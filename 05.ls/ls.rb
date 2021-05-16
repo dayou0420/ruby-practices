@@ -36,12 +36,11 @@ elsif params['l']
   # ls -l file type in description here
   def file_type(file)
     file = File.stat(file.strip).ftype
-    case file
-    when 'directory'
-      'd'
-    when 'file'
-      '-'
-    end
+    file_type = {
+      'd' => '---',
+      '-' => '--x'
+    }
+    file_type[file]
   end
 
   # ls -l octal digit of permision in descriptin here
