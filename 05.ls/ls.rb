@@ -90,7 +90,7 @@ elsif params['l']
     file_time_stamp_time_output = File.stat(file.strip).mtime.strftime('%H:%M').rjust(file_time_stamp_time_length)
 
     puts "#{file_type(file)}#{file_mode(file)} #{hard_link_output} #{file_owner} #{file_group} #{file_byte_output}"\
-    "#{file_time_stamp_month_output} #{file_time_stamp_day_output} #{file_time_stamp_time_output} #{file}"
+    " #{file_time_stamp_month_output} #{file_time_stamp_day_output} #{file_time_stamp_time_output} #{file}"
   end
 else
   result.each { |row| puts row.join(' ') }
