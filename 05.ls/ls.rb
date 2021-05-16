@@ -50,16 +50,17 @@ elsif params['l']
     mode = mode[-3, 3].chars.map { |m| m }
 
     file = mode.map do |n|
-      case n
-      when '0' then '---'
-      when '1' then '--x'
-      when '2' then '-w-'
-      when '3' then '-wx'
-      when '4' then 'r--'
-      when '5' then 'r-x'
-      when '6' then 'rw-'
-      when '7' then 'rwx'
-      end
+      permission_type = {
+        '0' => '---',
+        '1' => '--x',
+        '2' => '-w-',
+        '3' => '-wx',
+        '4' => 'r--',
+        '5' => 'r-x',
+        '6' => 'rw-',
+        '7' => 'rwx'
+      }
+      permission_type[n]
     end
     file.join
   end
