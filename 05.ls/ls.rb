@@ -90,9 +90,9 @@ def file_group(file)
 end
 
 if params['r']
-  files.map! { |x| x == nil? ? '' : x }
-  files = files.compact.map { |file| file.ljust(max_words) }
-  result = files.each_slice(allow_size).to_a.transpose
+  @files.map! { |x| x == nil? ? '' : x }
+  @files = @files.compact.map { |file| file.ljust(max_words) }
+  result = @files.each_slice(allow_size).to_a.transpose
   result.reverse.map { |row| puts row.reverse.join(' ') }
 
 elsif params['l']
