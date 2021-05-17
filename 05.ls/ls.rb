@@ -37,8 +37,8 @@ elsif params['l']
   def file_type(file)
     file = File.stat(file.strip).ftype
     file_type = {
-      'd' => '---',
-      '-' => '--x'
+      'directory' => 'd',
+      'file' => '-'
     }
     file_type[file]
   end
