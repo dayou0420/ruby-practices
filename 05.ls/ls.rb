@@ -94,15 +94,18 @@ elsif params['l']
     file = File.stat(file.strip).mtime.strftime('%H:%M').rjust(file_time_stamp_time_length)
   end
 
+  def file_owner(file)
+    file_owner = @files.compact.map { |f| Etc.getpwuid(File.stat(f.strip).uid).name }
+    file = Etc.getpwuid(File.stat(file.strip).uid).name
+  end
+
+  def file_group(file)
+    file_owner = @files.compact.map { |f| Etc.getgrgid(File.stat(f.strip).gid).name }
+    file = Etc.getgrgid(File.stat(file.strip).gid).name
+  end
+
   @files.compact.each do |file|
-
-    file_owner = Etc.getpwuid(File.stat(file.strip).uid).name
-
-    file_group = Etc.getgrgid(File.stat(file.strip).gid).name
-
-    #file_time_stamp_time_output = File.stat(file.strip).mtime.strftime('%H:%M').rjust(file_time_stamp_time_length)
-
-    puts "#{file_type(file)}#{file_mode(file)} #{file_hard_link(file)} #{file_owner} #{file_group} #{file_byte(file)}"\
+    puts "#{file_type(file)}#{file_mode(file)} #{file_hard_link(file)} #{file_owner(file)} #{file_group(file)} #{file_byte(file)}"\
     " #{file_time_stamp_month(file)} #{file_time_stamp_day(file)} #{file_time_stamp_time(file)} #{file}"
   end
 else
