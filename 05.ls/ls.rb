@@ -11,7 +11,7 @@ params = ARGV.getopts('r', 'l', 'a')
                   Dir.glob('*').sort
                 end
 
-def ls_command(target_files)
+def without_option(target_files)
   max_words = target_files.map(&:length).max
   files = target_files.map { |file| file.ljust(max_words) }
   files << nil while (files.size % 3) != 0
@@ -105,5 +105,5 @@ end
 if params['l']
   with_l_option(@target_files)
 else
-  ls_command(@target_files)
+  without_option(@target_files)
 end
