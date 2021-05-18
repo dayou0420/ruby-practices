@@ -12,7 +12,7 @@ params = ARGV.getopts('r', 'l', 'a')
                 end
 
 def ls_command(target_files)
-  max_words = target_files.map(&:length).max.to_i
+  max_words = target_files.map(&:length).max
   files = target_files.map { |file| file.ljust(max_words) }
   files << nil while (files.size % 3) != 0
   allow_size = files.size / 3
