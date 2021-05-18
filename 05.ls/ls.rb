@@ -20,6 +20,15 @@ def ls_command(target_files)
   result.each { |row| puts row.join(' ') }
 end
 
+def with_l_option(target_files)
+  block_size = @target_files.compact.map { |file| File.stat(file.strip).blocks }
+  puts "total #{block_size.sum}"
+  @target_files.compact.each do |file|
+    puts "#{symbol_type(file)}#{permissions(file)} #{hard_link(file)} #{owner_name(file)} #{group_name(file)} #{byte_size(file)}"\
+    " #{time_stamp_month(file)} #{time_stamp_day(file)} #{time_stamp_time(file)} #{file}"
+  end
+end
+
 def symbol_type(file)
   file = File.stat(file.strip).ftype
   file_type = {
@@ -94,12 +103,7 @@ end
 @target_files.reverse! if params['r']
 
 if params['l']
-  block_size = @target_files.compact.map { |file| File.stat(file.strip).blocks }
-  puts "total #{block_size.sum}"
-  @target_files.compact.each do |file|
-    puts "#{symbol_type(file)}#{permissions(file)} #{hard_link(file)} #{owner_name(file)} #{group_name(file)} #{byte_size(file)}"\
-    " #{time_stamp_month(file)} #{time_stamp_day(file)} #{time_stamp_time(file)} #{file}"
-  end
+  with_l_option(@target_files)
 else
   ls_command(@target_files)
 end
