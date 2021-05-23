@@ -49,14 +49,10 @@ if File.pipe?($stdin)
   input = $stdin.read
   puts "#{lines(input)} #{characters(input)} #{byte(input)}"
 elsif params['l']
-  every_file = Dir.glob('*').sort
-  every_file.delete_if do |f|
-    FileTest.directory?(f)
-  end
+  every_file = ARGV
   every_file.each do |f|
     file = File.read(f)
-    puts "#{file.count("\n").to_s.rjust(8)} #{file.split(/\s+/).size.to_s.rjust(8)}"\
-         "#{file.size.to_s.rjust(8)} #{f}"
+    puts "#{file.count("\n").to_s.rjust(8)} #{f}"
   end
 else
   target_file = ARGV
