@@ -56,13 +56,13 @@ elsif params['l']
   every_file.each do |f|
     file = File.read(f)
     puts "#{file.count("\n").to_s.rjust(8)} #{file.split(/\s+/).size.to_s.rjust(8)}"\
-         "#{file.split(/\s+/).size.to_s.rjust(8)} #{f}"
+         "#{file.size.to_s.rjust(8)} #{f}"
   end
 else
   target_file = ARGV
   target_file.each do |f|
     file = File.read(f)
     puts "#{file.count("\n").to_s.rjust(8)} #{file.split(/\s+/).size.to_s.rjust(8)}"\
-         "#{file.split(/\s+/).size.to_s.rjust(8)} #{f}"
+         "#{file.size.to_s.rjust(8)} #{f}"
   end
 end
