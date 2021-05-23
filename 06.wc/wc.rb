@@ -38,6 +38,10 @@ def byte(input)
   input.size.to_s.rjust(8)
 end
 
+# wc.rb without option
+input = $stdin.read
+puts "#{lines(input)} #{characters(input)} #{byte(input)}"
+
 # wc.rb -l option
 params = ARGV.getopts('l')
 
