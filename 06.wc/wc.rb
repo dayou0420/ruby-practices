@@ -8,12 +8,10 @@ def text_lines(target_file)
   line_counts = 0
   file.each_line { line_counts += 1 }
   file.close
-  line_counts.to_s.rjust(8)
 end
 
 def character_counts(target_file)
-  characters_array = File.read(target_file).split(/\s+/)
-  characters_array.size.to_s.rjust(7)
+  File.read(target_file).split(/\s+/)
 end
 
 def file_byte(target_file)
@@ -22,7 +20,7 @@ def file_byte(target_file)
 end
 
 def file_name(target_file)
-  Dir.glob(target_file).join
+  Dir.glob(target_file)
 end
 
 # `ls -l | wc.rb` command here
@@ -43,10 +41,7 @@ target_file = ARGV
 # wc.rb -l option
 params = ARGV.getopts('l')
 
-if File.pipe?($stdin)
-  input = $stdin.read
-  puts "#{lines(input)} #{characters(input)} #{byte(input)}"
-elsif target_file.empty?
+if File.pipe?($stdin) || target_file.empty?
   input = $stdin.read
   puts "#{lines(input)} #{characters(input)} #{byte(input)}"
 elsif params['l']
