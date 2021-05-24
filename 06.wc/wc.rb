@@ -38,9 +38,7 @@ def byte(input)
   input.size.to_s.rjust(8)
 end
 
-# wc.rb without option
-input = $stdin.read
-puts "#{lines(input)} #{characters(input)} #{byte(input)}"
+target_file = ARGV
 
 # wc.rb -l option
 params = ARGV.getopts('l')
@@ -48,14 +46,15 @@ params = ARGV.getopts('l')
 if File.pipe?($stdin)
   input = $stdin.read
   puts "#{lines(input)} #{characters(input)} #{byte(input)}"
+elsif target_file.empty?
+  input = $stdin.read
+  puts "#{lines(input)} #{characters(input)} #{byte(input)}"
 elsif params['l']
-  every_file = ARGV
-  every_file.each do |f|
+  target_file.each do |f|
     file = File.read(f)
     puts "#{file.count("\n").to_s.rjust(8)} #{f}"
   end
 else
-  target_file = ARGV
   target_file.each do |f|
     file = File.read(f)
     puts "#{file.count("\n").to_s.rjust(8)} #{file.split(/\s+/).size.to_s.rjust(8)}"\
