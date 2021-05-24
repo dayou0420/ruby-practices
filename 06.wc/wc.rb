@@ -2,28 +2,20 @@
 
 require 'optparse'
 
-# `wc.rb file name and some file names` command here
-def text_lines(target_file)
-  file = File.open(target_file)
-  line_counts = 0
-  file.each_line { line_counts += 1 }
-  file.close
+# With calculating total
+def text_lines(file)
+  file.lines.count
 end
 
-def character_counts(target_file)
-  File.read(target_file).split(/\s+/)
+def character_counts(file)
+  file.split(/\s+/).size
 end
 
-def file_byte(target_file)
-  file_info = File.stat(target_file)
-  file_info.size.to_s.rjust(8)
+def byte_size(file)
+  file.size
 end
 
-def file_name(target_file)
-  Dir.glob(target_file)
-end
-
-# `ls -l | wc.rb` command here
+# Standard input methods
 def lines(input)
   input.count("\n").to_s.rjust(8)
 end
@@ -38,21 +30,35 @@ end
 
 target_file = ARGV
 
-# wc.rb -l option
 params = ARGV.getopts('l')
 
+# Standard output
 if File.pipe?($stdin) || target_file.empty?
   input = $stdin.read
   puts "#{lines(input)} #{characters(input)} #{byte(input)}"
+
+# With -l option
 elsif params['l']
+  lines_sum = 0
   target_file.each do |f|
     file = File.read(f)
     puts "#{file.count("\n").to_s.rjust(8)} #{f}"
+    lines_sum += text_lines(file)
   end
+  puts "#{lines_sum.to_s.rjust(8)} total" if target_file.size >= 2
+
+# Without option
 else
+  lines_sum = 0
+  characters_sum = 0
+  bytes_sum = 0
   target_file.each do |f|
     file = File.read(f)
     puts "#{file.count("\n").to_s.rjust(8)} #{file.split(/\s+/).size.to_s.rjust(8)}"\
          "#{file.size.to_s.rjust(8)} #{f}"
+    lines_sum += text_lines(file)
+    characters_sum += character_counts(file)
+    bytes_sum += byte_size(file)
   end
+  puts "#{lines_sum.to_s.rjust(8)} #{characters_sum.to_s.rjust(8)} #{bytes_sum.to_s.rjust(7)} total" if target_file.size >= 2
 end
